@@ -98,9 +98,12 @@
 
   <!-- Scripts -->
   <script type="module">
+    import { loadPerfumes } from './js/data-loader.js';
     import { initPerfumeDetail } from './js/perfume.js';
 
     // Initialize perfume detail
+    await loadPerfumes();
+
     initPerfumeDetail();
 
     console.log('[perfume] Perfume page loaded');
