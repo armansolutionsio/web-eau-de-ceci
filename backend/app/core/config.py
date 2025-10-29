@@ -13,11 +13,8 @@ class Settings(BaseSettings):
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = True
 
-    # Database
-    DATABASE_URL: str = "postgresql://eaudececi:eaudececi123@db:5432/eaudececi"
-
-    # Production database (Render PostgreSQL 17)
-    PROD_DATABASE_URL: Optional[str] = None
+    # Database (defaults to Render production DB)
+    DATABASE_URL: str = "postgresql://arman_user:dwNYglIlqrPrXEWwto4mA98pfHOJxBO7@dpg-d2f2teodl3ps73eepdr0-a.oregon-postgres.render.com/arman_travel"
 
     # CORS
     CORS_ORIGINS: list = ["http://localhost:3000", "http://localhost:8000", "*"]
