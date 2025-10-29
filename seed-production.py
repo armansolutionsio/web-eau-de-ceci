@@ -1,14 +1,19 @@
 """
-Seed database with initial perfume data
+Seed PRODUCTION database (Render PostgreSQL) with initial perfume data
 """
 import sys
 from pathlib import Path
 
 # Add backend to path
-sys.path.append(str(Path(__file__).parent))
+sys.path.append(str(Path(__file__).parent / "backend"))
 
-from app.db.session import SessionLocal, engine, Base
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from app.models.perfume import Perfume
+from app.db.session import Base
+
+# Production database URL
+PRODUCTION_DATABASE_URL = "postgresql://arman_user:dwNYglIlqrPrXEWwto4mA98pfHOJxBO7@dpg-d2f2teodl3ps73eepdr0-a.oregon-postgres.render.com/arman_travel"
 
 # Perfume data with real images
 PERFUMES_DATA = [
@@ -110,54 +115,60 @@ PERFUMES_DATA = [
 ]
 
 
-def seed_database():
-    """Seed database with initial data"""
-    print("🌱 Starting database seed...")
-
-    # Create tables
-    print("📦 Creating tables...")
-    Base.metadata.create_all(bind=engine)
-
-    # Create session
-    db = SessionLocal()
+def seed_production_database():
+    """Seed production database with initial data"""
+    print("🌱 Starting PRODUCTION database seed...")
+    print(f"📍 Database: arman_travel (Render PostgreSQL)")
+    print()
 
     try:
+        # Create engine
+        print("🔗 Connecting to production database...")
+        engine = create_engine(
+            PRODUCTION_DATABASE_URL,
+            pool_pre_ping=True,
+            pool_size=5,
+            max_overflow=10,
+        )
+
+        # Create session
+        SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+        db = SessionLocal()
+
         # Check if perfumes already exist
         existing_count = db.query(Perfume).count()
 
         if existing_count > 0:
             print(f"⚠️  Database already contains {existing_count} perfumes")
+            response = input("Do you want to clear and reseed? (yes/no): ")
 
-            # Check if running in automated environment (no TTY)
-            import os
-            if os.isatty(0):
-                # Interactive mode
-                response = input("Do you want to clear and reseed? (yes/no): ")
-                if response.lower() == "yes":
-                    print("🗑️  Clearing existing data...")
-                    db.query(Perfume).delete()
-                    db.commit()
-                else:
-                    print("✅ Keeping existing data")
-                    return
+            if response.lower() == "yes":
+                print("🗑️  Clearing existing data...")
+                db.query(Perfume).delete()
+                db.commit()
             else:
-                # Non-interactive mode (Render deployment)
-                print("✅ Keeping existing data (non-interactive mode)")
+                print("✅ Keeping existing data")
                 return
 
         # Insert perfumes
         print(f"📝 Inserting {len(PERFUMES_DATA)} perfumes...")
 
-        for perfume_data in PERFUMES_DATA:
+        for i, perfume_data in enumerate(PERFUMES_DATA, 1):
             perfume = Perfume(**perfume_data)
             db.add(perfume)
+            print(f"  [{i}/{len(PERFUMES_DATA)}] Added: {perfume_data['brand']} - {perfume_data['name']}")
 
         db.commit()
 
-        print(f"✅ Successfully seeded database with {len(PERFUMES_DATA)} perfumes!")
+        print()
+        print(f"✅ Successfully seeded PRODUCTION database with {len(PERFUMES_DATA)} perfumes!")
+        print()
+        print("🎉 Production database is ready!")
 
     except Exception as e:
-        print(f"❌ Error seeding database: {e}")
+        print()
+        print(f"❌ Error seeding production database: {e}")
+        print()
         db.rollback()
         raise
 
@@ -166,4 +177,15 @@ def seed_database():
 
 
 if __name__ == "__main__":
-    seed_database()
+    print("=" * 60)
+    print("  SEED PRODUCTION DATABASE - Render PostgreSQL")
+    print("=" * 60)
+    print()
+
+    response = input("⚠️  This will modify PRODUCTION data. Continue? (yes/no): ")
+
+    if response.lower() == "yes":
+        print()
+        seed_production_database()
+    else:
+        print("❌ Cancelled by user")
