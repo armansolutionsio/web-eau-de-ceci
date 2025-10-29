@@ -171,10 +171,13 @@
 
   <!-- Scripts -->
   <script type="module">
-    import { perfumes } from './js/data.js';
+    import { loadPerfumes, perfumes } from './js/data-loader.js';
     import { initSearch } from './js/search.js';
     import { formatStars } from './js/ui.js';
     import { formatNumber } from './js/app.js';
+
+    // Load perfumes from API first
+    await loadPerfumes();
 
     // Initialize search
     initSearch('#home-search', '#home-typeahead');
@@ -185,7 +188,7 @@
       .slice(0, 6);
 
     document.querySelector('#trending-perfumes').innerHTML = trending.map(perfume => `
-      <a href="perfume.html?id=${perfume.id}" class="perfume-card">
+      <a href="/perfume?id=${perfume.id}" class="perfume-card">
         <div class="perfume-card-image">
           <img src="${perfume.image}" alt="${perfume.name}">
         </div>
@@ -209,7 +212,7 @@
       .slice(0, 6);
 
     document.querySelector('#new-arrivals').innerHTML = newArrivals.map(perfume => `
-      <a href="perfume.html?id=${perfume.id}" class="perfume-card">
+      <a href="/perfume?id=${perfume.id}" class="perfume-card">
         <div class="perfume-card-image">
           <img src="${perfume.image}" alt="${perfume.name}">
           <span class="perfume-card-badge badge badge-rose">Nuevo</span>
@@ -234,7 +237,7 @@
       .slice(0, 6);
 
     document.querySelector('#top-rated').innerHTML = topRated.map(perfume => `
-      <a href="perfume.html?id=${perfume.id}" class="perfume-card">
+      <a href="/perfume?id=${perfume.id}" class="perfume-card">
         <div class="perfume-card-image">
           <img src="${perfume.image}" alt="${perfume.name}">
         </div>

@@ -2,7 +2,7 @@
    CATALOG.JS - Catalog Page Logic
    ======================================== */
 
-import { perfumes, getAllNotes } from './data.js';
+import { perfumes, getAllNotes } from './data-loader.js';
 import { getHashParams, setHashParams, formatNumber } from './app.js';
 import { formatStars, showLoading, showEmptyState } from './ui.js';
 
