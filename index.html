@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Eau de Ceci - Descubre tu fragancia perfecta. Explora nuestra colección de perfumes de lujo con notas únicas y memorables.">
+  <meta name="keywords" content="perfumes, fragancias, eau de parfum, perfumería, lujo">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Eau de Ceci - Parfumerie">
+  <meta property="og:description" content="Descubre tu fragancia perfecta en nuestra colección exclusiva de perfumes.">
+  <meta property="og:image" content="assets/og-image.png">
+  <meta property="og:url" content="">
+
+  <title>Eau de Ceci - Parfumerie</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="site-logo" aria-label="Eau de Ceci - Inicio">
+        <img src="assets/logo.svg" alt="Eau de Ceci">
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="catalog.html" class="nav-link">Catálogo</a></li>
+          <li><a href="community.html" class="nav-link">Comunidad</a></li>
+          <li><a href="news.html" class="nav-link">Noticias</a></li>
+        </ul>
+        <div class="header-actions">
+          <a href="login.html" class="btn btn-outline btn-sm">Iniciar sesión</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="page-hero">
+      <div class="container hero-content">
+        <h1 class="hero-title">Descubre Tu Fragancia Perfecta</h1>
+        <p class="hero-subtitle">Explora nuestra colección de perfumes exclusivos</p>
+
+        <!-- Search -->
+        <div class="search-container" style="margin-top: var(--space-6);">
+          <div class="search-input-wrapper">
+            <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input
+              type="search"
+              id="home-search"
+              class="search-input"
+              placeholder="Busca por marca, perfume o nota..."
+              aria-label="Buscar perfumes"
+              autocomplete="off"
+            >
+            <button class="search-clear hidden" aria-label="Limpiar búsqueda">×</button>
+          </div>
+          <div id="home-typeahead" class="typeahead-dropdown" role="listbox"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trending Perfumes -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Tendencias</h2>
+          <a href="catalog.html" class="btn btn-ghost">Ver todo →</a>
+        </div>
+        <div id="trending-perfumes" class="catalog-grid"></div>
+      </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Novedades</h2>
+          <a href="catalog.html#sort=newest" class="btn btn-ghost">Ver todo →</a>
+        </div>
+        <div id="new-arrivals" class="catalog-grid"></div>
+      </div>
+    </section>
+
+    <!-- Top Rated -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Más Valorados</h2>
+          <a href="catalog.html#sort=rating" class="btn btn-ghost">Ver todo →</a>
+        </div>
+        <div id="top-rated" class="catalog-grid"></div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+      <div class="container">
+        <div class="card" style="padding: var(--space-10); text-align: center; background: linear-gradient(135deg, rgba(181, 101, 118, 0.1) 0%, rgba(159, 76, 96, 0.1) 100%);">
+          <h2 class="mb-4">Explora Nuestra Colección Completa</h2>
+          <p class="text-muted mb-6">Más de 30 fragancias exclusivas esperando ser descubiertas</p>
+          <a href="catalog.html" class="btn btn-primary btn-lg">Ver Catálogo Completo</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <img src="assets/logo.svg" alt="Eau de Ceci" style="height: 45px; margin-bottom: var(--space-4);">
+          <p>Descubre tu fragancia perfecta con nuestra colección exclusiva de perfumes de lujo.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Navegación</h4>
+          <div class="footer-links">
+            <a href="index.html" class="footer-link">Inicio</a>
+            <a href="catalog.html" class="footer-link">Catálogo</a>
+            <a href="community.html" class="footer-link">Comunidad</a>
+            <a href="news.html" class="footer-link">Noticias</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Información</h4>
+          <div class="footer-links">
+            <a href="#" class="footer-link">Sobre Nosotros</a>
+            <a href="#" class="footer-link">Contacto</a>
+            <a href="#" class="footer-link">Preguntas Frecuentes</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <div class="footer-links">
+            <a href="#" class="footer-link">Privacidad</a>
+            <a href="#" class="footer-link">Términos de Uso</a>
+            <a href="#" class="footer-link">Cookies</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2024 Eau de Ceci. Todos los derechos reservados.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Facebook">F</a>
+          <a href="#" class="social-link" aria-label="Instagram">I</a>
+          <a href="#" class="social-link" aria-label="Twitter">T</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { perfumes } from './js/data.js';
+    import { initSearch } from './js/search.js';
+    import { formatStars } from './js/ui.js';
+    import { formatNumber } from './js/app.js';
+
+    // Initialize search
+    initSearch('#home-search', '#home-typeahead');
+
+    // Render trending perfumes (top 6 by popularity)
+    const trending = [...perfumes]
+      .sort((a, b) => b.popularityScore - a.popularityScore)
+      .slice(0, 6);
+
+    document.querySelector('#trending-perfumes').innerHTML = trending.map(perfume => `
+      <a href="perfume.html?id=${perfume.id}" class="perfume-card">
+        <div class="perfume-card-image">
+          <img src="${perfume.image}" alt="${perfume.name}">
+        </div>
+        <div class="perfume-card-body">
+          <div class="perfume-card-brand">${perfume.brand}</div>
+          <h3 class="perfume-card-title">${perfume.name}</h3>
+          <div class="perfume-card-rating">
+            ${formatStars(perfume.ratingAvg)}
+            <span class="rating-count">(${formatNumber(perfume.votes)})</span>
+          </div>
+          <div class="perfume-card-notes">
+            ${perfume.notesTop.slice(0, 3).map(note => `<span class="note-chip">${note}</span>`).join('')}
+          </div>
+        </div>
+      </a>
+    `).join('');
+
+    // Render new arrivals (top 6 by release year)
+    const newArrivals = [...perfumes]
+      .sort((a, b) => b.releaseYear - a.releaseYear)
+      .slice(0, 6);
+
+    document.querySelector('#new-arrivals').innerHTML = newArrivals.map(perfume => `
+      <a href="perfume.html?id=${perfume.id}" class="perfume-card">
+        <div class="perfume-card-image">
+          <img src="${perfume.image}" alt="${perfume.name}">
+          <span class="perfume-card-badge badge badge-rose">Nuevo</span>
+        </div>
+        <div class="perfume-card-body">
+          <div class="perfume-card-brand">${perfume.brand}</div>
+          <h3 class="perfume-card-title">${perfume.name}</h3>
+          <div class="perfume-card-rating">
+            ${formatStars(perfume.ratingAvg)}
+            <span class="rating-count">(${formatNumber(perfume.votes)})</span>
+          </div>
+          <div class="perfume-card-notes">
+            ${perfume.notesTop.slice(0, 3).map(note => `<span class="note-chip">${note}</span>`).join('')}
+          </div>
+        </div>
+      </a>
+    `).join('');
+
+    // Render top rated (top 6 by rating)
+    const topRated = [...perfumes]
+      .sort((a, b) => b.ratingAvg - a.ratingAvg)
+      .slice(0, 6);
+
+    document.querySelector('#top-rated').innerHTML = topRated.map(perfume => `
+      <a href="perfume.html?id=${perfume.id}" class="perfume-card">
+        <div class="perfume-card-image">
+          <img src="${perfume.image}" alt="${perfume.name}">
+        </div>
+        <div class="perfume-card-body">
+          <div class="perfume-card-brand">${perfume.brand}</div>
+          <h3 class="perfume-card-title">${perfume.name}</h3>
+          <div class="perfume-card-rating">
+            ${formatStars(perfume.ratingAvg)}
+            <span class="rating-count">(${formatNumber(perfume.votes)})</span>
+          </div>
+          <div class="perfume-card-notes">
+            ${perfume.notesTop.slice(0, 3).map(note => `<span class="note-chip">${note}</span>`).join('')}
+          </div>
+        </div>
+      </a>
+    `).join('');
+
+    console.log('[index] Home page initialized');
+  </script>
+</body>
+</html>

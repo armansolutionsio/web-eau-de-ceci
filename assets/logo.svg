@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <!-- Elegant logo for Eau de Ceci -->
+  <defs>
+    <linearGradient id="roseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#B56576;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9f4c60;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Decorative perfume bottle silhouette -->
+  <path d="M 20 15 L 25 15 L 25 12 L 27 12 L 27 10 L 18 10 L 18 12 L 20 12 Z" fill="url(#roseGradient)"/>
+  <rect x="15" y="15" width="15" height="25" rx="2" fill="url(#roseGradient)" opacity="0.8"/>
+  <ellipse cx="22.5" cy="40" rx="7.5" ry="3" fill="url(#roseGradient)"/>
+  <circle cx="22.5" cy="25" r="2" fill="#ffffff" opacity="0.5"/>
+
+  <!-- Brand text: Eau de Ceci -->
+  <text x="50" y="28" font-family="'Playfair Display', serif" font-size="22" font-weight="600" fill="#1f2937">Eau de Ceci</text>
+  <text x="50" y="45" font-family="'Lato', sans-serif" font-size="9" letter-spacing="2" fill="#6b7280">PARFUMERIE</text>
+</svg>

@@ -1,0 +1,67 @@
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:17-alpine
+    container_name: eaudececi-db
+    environment:
+      POSTGRES_USER: eaudececi
+      POSTGRES_PASSWORD: eaudececi123
+      POSTGRES_DB: eaudececi
+    ports:
+      - "5433:5432"  # Puerto externo 5433 para evitar conflictos
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U eaudececi"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - eaudececi-network
+
+  # Backend API (FastAPI)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: eaudececi-backend
+    environment:
+      DATABASE_URL: postgresql://eaudececi:eaudececi123@db:5432/eaudececi
+      DEBUG: "true"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./index.html:/app/frontend/index.html
+      - ./catalog.html:/app/frontend/catalog.html
+      - ./perfume.html:/app/frontend/perfume.html
+      - ./community.html:/app/frontend/community.html
+      - ./news.html:/app/frontend/news.html
+      - ./login.html:/app/frontend/login.html
+      - ./css:/app/frontend/css
+      - ./js:/app/frontend/js
+      - ./assets:/app/frontend/assets
+      - ./README.md:/app/frontend/README.md
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - eaudececi-network
+    command: >
+      sh -c "
+        echo 'Waiting for database...' &&
+        sleep 5 &&
+        echo 'Running migrations...' &&
+        alembic upgrade head &&
+        echo 'Seeding database...' &&
+        python seed_db.py &&
+        echo 'Starting server...' &&
+        uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --reload-dir /app
+      "
+
+volumes:
+  postgres_data:
+
+networks:
+  eaudececi-network:
+    driver: bridge
