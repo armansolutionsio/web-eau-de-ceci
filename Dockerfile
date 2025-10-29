@@ -30,6 +30,8 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
   CMD python -c "import requests; requests.get('http://localhost:8000/api/health')" || exit 1
 
 # Run migrations and start server
-# Note: seed_db.py will skip if data already exists (non-interactive mode)
+# Note: Set DATABASE_URL explicitly for Render PostgreSQL
+ENV DATABASE_URL=postgresql://arman_user:dwNYglIlqrPrXEWwto4mA98pfHOJxBO7@dpg-d2f2teodl3ps73eepdr0-a.oregon-postgres.render.com/arman_travel
+
 CMD alembic upgrade head && \
     uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
