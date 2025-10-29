@@ -67,15 +67,27 @@
 
   /* Cards on mobile - more compact */
   .perfume-card {
-    min-height: 320px;
+    min-height: auto;
   }
 
   .perfume-card-image {
-    height: 180px;
-    object-fit: cover;
+    aspect-ratio: 4/5;
+    max-height: 200px;
+    height: auto;
+    padding: var(--space-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .perfume-card-content {
+  .perfume-card-image img {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .perfume-card-body {
     padding: var(--space-3);
   }
 
@@ -84,7 +96,7 @@
     margin-bottom: var(--space-2);
   }
 
-  .perfume-card .brand {
+  .perfume-card-brand {
     font-size: 0.875rem;
   }
 
@@ -294,11 +306,24 @@
   }
 
   .perfume-card {
-    min-height: 280px;
+    min-height: auto;
   }
 
   .perfume-card-image {
-    height: 150px;
+    aspect-ratio: 4/5;
+    max-height: 180px;
+    height: auto;
+    padding: var(--space-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .perfume-card-image img {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+    object-position: center;
   }
 }
 

@@ -23,6 +23,7 @@ const itemsPerPage = 12;
 export function initCatalog() {
   try {
     console.log('[catalog] initCatalog: initializing catalog');
+    console.log('[catalog] perfumes available:', perfumes.length);
 
     // Load filters from hash
     loadFiltersFromHash();
@@ -345,7 +346,7 @@ function paginateResults(perfumes, page, perPage) {
  */
 function renderPerfumes(container, perfumes) {
   container.innerHTML = perfumes.map(perfume => `
-    <a href="perfume.html?id=${perfume.id}" class="perfume-card">
+    <a href="/perfume?id=${perfume.id}" class="perfume-card">
       <div class="perfume-card-image">
         <img src="${perfume.image}" alt="${perfume.name}">
       </div>
