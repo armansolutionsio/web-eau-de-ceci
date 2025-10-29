@@ -354,7 +354,7 @@ function renderSuggestions(perfumeId) {
   console.log(`[perfume] renderSuggestions: rendering ${suggestions.length} suggestions`);
 
   container.innerHTML = suggestions.map(perfume => `
-    <a href="perfume.html?id=${perfume.id}" class="perfume-card">
+    <a href="/perfume?id=${perfume.id}" class="perfume-card">
       <div class="perfume-card-image">
         <img src="${perfume.image}" alt="${perfume.name}">
       </div>
@@ -384,7 +384,7 @@ function showError(message) {
         <div class="empty-state-icon">⚠️</div>
         <h2 class="empty-state-title">${message}</h2>
         <p class="empty-state-text">
-          <a href="catalog.html" class="btn btn-primary">Ver catálogo</a>
+          <a href="/catalog" class="btn btn-primary">Ver catálogo</a>
         </p>
       </div>
     `;

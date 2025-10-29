@@ -223,7 +223,11 @@
 
   <!-- Scripts -->
   <script type="module">
+    import { loadPerfumes } from './js/data-loader.js';
     import { initCatalog } from './js/catalog.js';
+
+    // Load perfumes from API first
+    await loadPerfumes();
 
     // Initialize catalog
     initCatalog();

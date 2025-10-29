@@ -71,12 +71,12 @@ export function initSearch(inputSelector, dropdownSelector) {
 
         if (selectedIndex >= 0 && currentResults[selectedIndex]) {
           // Navigate to specific perfume
-          navigateTo('perfume.html', { id: currentResults[selectedIndex].id });
+          navigateTo('/perfume', { id: currentResults[selectedIndex].id });
         } else {
           // Navigate to catalog with search query
           const query = searchInput.value.trim();
           if (query) {
-            navigateTo('catalog.html', { q: query });
+            navigateTo('/catalog', { q: query });
           }
         }
       } else if (e.key === 'Escape') {
@@ -202,7 +202,7 @@ function showTypeahead(dropdown, results) {
     results.forEach(perfume => {
       const item = document.createElement('a');
       item.className = 'typeahead-item';
-      item.href = `perfume.html?id=${perfume.id}`;
+      item.href = `/perfume?id=${perfume.id}`;
 
       item.innerHTML = `
         <img src="${perfume.image}" alt="${perfume.name}" class="typeahead-image">
