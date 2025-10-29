@@ -1,4 +1,5 @@
 from logging.config import fileConfig
+import os
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
@@ -11,6 +12,15 @@ from app.models.perfume import Perfume
 
 # this is the Alembic Config object
 config = context.config
+
+# Override sqlalchemy.url with environment variable if it exists
+# This allows Render to use DATABASE_URL instead of alembic.ini
+database_url = os.environ.get("DATABASE_URL")
+if database_url:
+    config.set_main_option("sqlalchemy.url", database_url)
+    print(f"[alembic] Using DATABASE_URL from environment")
+else:
+    print(f"[alembic] Using database URL from alembic.ini")
 
 # Interpret the config file for Python logging
 if config.config_file_name is not None:
