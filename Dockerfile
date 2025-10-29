@@ -29,6 +29,7 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
   CMD python -c "import requests; requests.get('http://localhost:8000/api/health')" || exit 1
 
-# Run migrations and start server
+# Run migrations, seed database, and start server
 CMD alembic upgrade head && \
+    python seed_db.py && \
     uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
