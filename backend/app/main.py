@@ -28,17 +28,74 @@ app.add_middleware(
 # Include routers
 app.include_router(perfumes.router)
 
-# Serve static files (frontend) - only if directory exists
-# In production (Render), frontend is at /app root
-# In development (Docker), we mount it differently
+# Determine frontend directory
 frontend_dir = Path("/app/frontend")
 frontend_root = Path("/app")
 
-# Try /app/frontend first (Docker), then /app (Render)
 if frontend_dir.exists() and (frontend_dir / "index.html").exists():
-    app.mount("/", StaticFiles(directory="/app/frontend", html=True), name="frontend")
+    FRONTEND_DIR = "/app/frontend"
 elif (frontend_root / "index.html").exists():
-    app.mount("/", StaticFiles(directory="/app", html=True), name="frontend")
+    FRONTEND_DIR = "/app"
+else:
+    FRONTEND_DIR = None
+
+# Clean URL routes - serve HTML pages without .html extension
+if FRONTEND_DIR:
+    from fastapi.responses import FileResponse, RedirectResponse
+
+    @app.get("/")
+    async def index():
+        return FileResponse(f"{FRONTEND_DIR}/index.html")
+
+    @app.get("/catalog")
+    async def catalog():
+        return FileResponse(f"{FRONTEND_DIR}/catalog.html")
+
+    @app.get("/perfume")
+    async def perfume():
+        return FileResponse(f"{FRONTEND_DIR}/perfume.html")
+
+    @app.get("/community")
+    async def community():
+        return FileResponse(f"{FRONTEND_DIR}/community.html")
+
+    @app.get("/news")
+    async def news():
+        return FileResponse(f"{FRONTEND_DIR}/news.html")
+
+    @app.get("/login")
+    async def login():
+        return FileResponse(f"{FRONTEND_DIR}/login.html")
+
+    # Redirects from .html URLs to clean URLs
+    @app.get("/index.html")
+    async def redirect_index():
+        return RedirectResponse(url="/", status_code=301)
+
+    @app.get("/catalog.html")
+    async def redirect_catalog():
+        return RedirectResponse(url="/catalog", status_code=301)
+
+    @app.get("/perfume.html")
+    async def redirect_perfume():
+        return RedirectResponse(url="/perfume", status_code=301)
+
+    @app.get("/community.html")
+    async def redirect_community():
+        return RedirectResponse(url="/community", status_code=301)
+
+    @app.get("/news.html")
+    async def redirect_news():
+        return RedirectResponse(url="/news", status_code=301)
+
+    @app.get("/login.html")
+    async def redirect_login():
+        return RedirectResponse(url="/login", status_code=301)
+
+    # Mount static assets (CSS, JS, images)
+    app.mount("/css", StaticFiles(directory=f"{FRONTEND_DIR}/css"), name="css")
+    app.mount("/js", StaticFiles(directory=f"{FRONTEND_DIR}/js"), name="js")
+    app.mount("/assets", StaticFiles(directory=f"{FRONTEND_DIR}/assets"), name="assets")
 
 
 @app.get("/api/health")
