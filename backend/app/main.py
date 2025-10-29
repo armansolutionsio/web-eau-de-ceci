@@ -29,9 +29,16 @@ app.add_middleware(
 app.include_router(perfumes.router)
 
 # Serve static files (frontend) - only if directory exists
+# In production (Render), frontend is at /app root
+# In development (Docker), we mount it differently
 frontend_dir = Path("/app/frontend")
-if frontend_dir.exists() and frontend_dir.is_dir():
+frontend_root = Path("/app")
+
+# Try /app/frontend first (Docker), then /app (Render)
+if frontend_dir.exists() and (frontend_dir / "index.html").exists():
     app.mount("/", StaticFiles(directory="/app/frontend", html=True), name="frontend")
+elif (frontend_root / "index.html").exists():
+    app.mount("/", StaticFiles(directory="/app", html=True), name="frontend")
 
 
 @app.get("/api/health")
