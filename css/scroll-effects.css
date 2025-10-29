@@ -1,0 +1,74 @@
+/* ========================================
+   SCROLL-EFFECTS.CSS - Scroll Animations
+   ======================================== */
+
+/**
+ * Fade effect for perfume cards based on scroll position
+ * Cards fade in as they approach the center of viewport
+ */
+
+.perfume-card {
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+/* Initial state - slightly faded and scaled down */
+.perfume-card.scroll-fade {
+  opacity: 0.3;
+  transform: scale(0.95);
+}
+
+/* Fully visible when centered */
+.perfume-card.scroll-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Smooth transition states */
+.perfume-card.scroll-fade-entering {
+  opacity: 0.5;
+  transform: scale(0.97);
+}
+
+.perfume-card.scroll-fade-leaving {
+  opacity: 0.5;
+  transform: scale(0.97);
+}
+
+/* Enhanced hover effect when visible */
+.perfume-card.scroll-visible:hover {
+  opacity: 1;
+  transform: scale(1.02) translateY(-4px);
+}
+
+/* Preserve card layout during transforms */
+.catalog-grid,
+.grid {
+  perspective: 1000px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .perfume-card {
+    transition: opacity 0.2s ease-out;
+    transform: none !important;
+  }
+
+  .perfume-card.scroll-fade {
+    opacity: 0.6;
+  }
+
+  .perfume-card.scroll-visible {
+    opacity: 1;
+  }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
