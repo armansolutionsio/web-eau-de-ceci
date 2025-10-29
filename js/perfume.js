@@ -2,7 +2,7 @@
    PERFUME.JS - Perfume Detail Page
    ======================================== */
 
-import { getPerfumeById, getSuggestions } from './data.js';
+import { getPerfumeById, getSuggestions } from './data-loader.js';
 import { getQueryParam, formatNumber } from './app.js';
 import { formatStars, toast, formatDate, getInitials } from './ui.js';
 

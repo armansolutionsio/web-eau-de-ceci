@@ -2,7 +2,7 @@
    SEARCH.JS - Search and Typeahead
    ======================================== */
 
-import { perfumes } from './data.js';
+import { perfumes } from './data-loader.js';
 import { navigateTo } from './app.js';
 import { debounce } from './ui.js';
 
