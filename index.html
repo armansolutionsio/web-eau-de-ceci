@@ -19,13 +19,14 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
 
   <!-- Header -->
   <header class="site-header">
     <div class="header-container">
-      <a href="index.html" class="site-logo" aria-label="Eau de Ceci - Inicio">
+      <a href="/" class="site-logo" aria-label="Eau de Ceci - Inicio">
         <img src="assets/logo.svg" alt="Eau de Ceci">
       </a>
 
@@ -37,13 +38,13 @@
 
       <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
         <ul class="nav-list">
-          <li><a href="index.html" class="nav-link">Inicio</a></li>
-          <li><a href="catalog.html" class="nav-link">Catálogo</a></li>
-          <li><a href="community.html" class="nav-link">Comunidad</a></li>
-          <li><a href="news.html" class="nav-link">Noticias</a></li>
+          <li><a href="/" class="nav-link">Inicio</a></li>
+          <li><a href="/catalog" class="nav-link">Catálogo</a></li>
+          <li><a href="/community" class="nav-link">Comunidad</a></li>
+          <li><a href="/news" class="nav-link">Noticias</a></li>
         </ul>
         <div class="header-actions">
-          <a href="login.html" class="btn btn-outline btn-sm">Iniciar sesión</a>
+          <a href="/login" class="btn btn-outline btn-sm">Iniciar sesión</a>
         </div>
       </nav>
     </div>
@@ -83,7 +84,7 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Tendencias</h2>
-          <a href="catalog.html" class="btn btn-ghost">Ver todo →</a>
+          <a href="/catalog" class="btn btn-ghost">Ver todo →</a>
         </div>
         <div id="trending-perfumes" class="catalog-grid"></div>
       </div>
@@ -94,7 +95,7 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Novedades</h2>
-          <a href="catalog.html#sort=newest" class="btn btn-ghost">Ver todo →</a>
+          <a href="/catalog#sort=newest" class="btn btn-ghost">Ver todo →</a>
         </div>
         <div id="new-arrivals" class="catalog-grid"></div>
       </div>
