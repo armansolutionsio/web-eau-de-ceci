@@ -1,0 +1,322 @@
+/* ========================================
+   MOBILE.CSS - Mobile-first Enhancements
+   ======================================== */
+
+/* Touch-friendly tap targets */
+@media (max-width: 768px) {
+  /* Minimum 44x44px tap targets (iOS guideline) */
+  .btn,
+  .nav-link,
+  a.card,
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Larger spacing for better touch */
+  .nav-list {
+    gap: var(--space-4);
+  }
+
+  .nav-link {
+    padding: var(--space-3) var(--space-4);
+    font-size: 1.125rem;
+  }
+
+  /* Better mobile header */
+  .site-header {
+    padding: var(--space-3) 0;
+  }
+
+  .site-logo img {
+    max-height: 40px;
+  }
+
+  /* Mobile menu improvements */
+  .mobile-menu-toggle {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .mobile-menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background-color: var(--cec-text);
+    transition: all var(--transition-base);
+  }
+
+  /* Search on mobile - more compact */
+  .search-bar {
+    max-width: 100%;
+    margin-bottom: var(--space-4);
+  }
+
+  .search-bar input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .search-container {
+    padding: var(--space-4) 0;
+  }
+
+  /* Cards on mobile - more compact */
+  .perfume-card {
+    min-height: 320px;
+  }
+
+  .perfume-card-image {
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .perfume-card-content {
+    padding: var(--space-3);
+  }
+
+  .perfume-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-2);
+  }
+
+  .perfume-card .brand {
+    font-size: 0.875rem;
+  }
+
+  /* Forms on mobile */
+  input,
+  textarea,
+  select {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: var(--space-3);
+  }
+
+  /* Container padding on mobile */
+  .container {
+    padding: 0 var(--space-4);
+  }
+
+  /* Section spacing - more compact on mobile */
+  .section {
+    padding: var(--space-4) 0;
+  }
+
+  .section-header {
+    margin-bottom: var(--space-4);
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-2);
+  }
+
+  /* Hero section - much more compact on mobile */
+  .page-hero {
+    padding: var(--space-5) 0 !important;
+    min-height: auto !important;
+  }
+
+  .hero-content {
+    padding: 0 var(--space-4);
+  }
+
+  .hero-title {
+    font-size: 1.75rem !important;
+    line-height: 1.2;
+    margin-bottom: var(--space-3) !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem !important;
+    margin-bottom: var(--space-4) !important;
+  }
+
+  /* Filters on mobile */
+  .filters-section {
+    padding: var(--space-4);
+  }
+
+  .filter-group {
+    margin-bottom: var(--space-4);
+  }
+
+  /* Catalog grid - always 1 column on small mobile */
+  @media (max-width: 480px) {
+    .catalog-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  /* Community posts on mobile */
+  .post-card,
+  .review-card {
+    padding: var(--space-4);
+  }
+
+  /* Footer on mobile */
+  .site-footer {
+    padding: var(--space-6) 0;
+  }
+
+  .footer-columns {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  /* Modal on mobile */
+  .modal {
+    padding: var(--space-4);
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  /* Sticky elements - prevent overflow */
+  .sticky-filters {
+    position: relative;
+    top: 0;
+  }
+
+  /* Images - prevent layout shift */
+  img {
+    height: auto;
+  }
+
+  /* Typography adjustments */
+  h1 {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  /* Better spacing for chips/tags */
+  .chip {
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.875rem;
+  }
+
+  /* Horizontal scroll for note lists */
+  .notes-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Fix for iOS Safari bottom bar */
+  .hero {
+    min-height: -webkit-fill-available;
+  }
+
+  /* Prevent rubber band effect */
+  body {
+    overscroll-behavior-y: none;
+  }
+
+  /* Smooth scrolling on iOS */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Android Chrome specific */
+@media (max-width: 768px) {
+  /* Disable tap highlight */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Better focus for accessibility */
+  *:focus-visible {
+    outline: 3px solid var(--cec-rose);
+    outline-offset: 2px;
+  }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    min-height: 80vh;
+  }
+
+  .mobile-menu {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 var(--space-3);
+  }
+
+  .page-hero {
+    padding: var(--space-4) 0 !important;
+  }
+
+  .hero-title {
+    font-size: 1.5rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.875rem !important;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.875rem;
+  }
+
+  .section {
+    padding: var(--space-3) 0;
+  }
+
+  .perfume-card {
+    min-height: 280px;
+  }
+
+  .perfume-card-image {
+    height: 150px;
+  }
+}
+
+/* Prevent horizontal scroll */
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  * {
+    max-width: 100%;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
