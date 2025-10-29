@@ -1,6 +1,8 @@
 """
 FastAPI main application
 """
+import os
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -26,8 +28,10 @@ app.add_middleware(
 # Include routers
 app.include_router(perfumes.router)
 
-# Serve static files (frontend)
-app.mount("/", StaticFiles(directory="/app/frontend", html=True), name="frontend")
+# Serve static files (frontend) - only if directory exists
+frontend_dir = Path("/app/frontend")
+if frontend_dir.exists() and frontend_dir.is_dir():
+    app.mount("/", StaticFiles(directory="/app/frontend", html=True), name="frontend")
 
 
 @app.get("/api/health")
