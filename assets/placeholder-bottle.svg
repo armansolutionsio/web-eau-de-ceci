@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" fill="none">
+  <!-- Elegant perfume bottle placeholder -->
+  <defs>
+    <linearGradient id="bottleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3f4f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e5e7eb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="liquidGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B56576;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#9f4c60;stop-opacity:0.5" />
+    </linearGradient>
+  </defs>
+
+  <!-- Bottle cap -->
+  <rect x="70" y="30" width="60" height="15" rx="3" fill="#d1d5db"/>
+  <rect x="75" y="25" width="50" height="12" rx="2" fill="#e5e7eb"/>
+  <line x1="85" y1="27" x2="85" y2="35" stroke="#9ca3af" stroke-width="1"/>
+  <line x1="100" y1="27" x2="100" y2="35" stroke="#9ca3af" stroke-width="1"/>
+  <line x1="115" y1="27" x2="115" y2="35" stroke="#9ca3af" stroke-width="1"/>
+
+  <!-- Neck -->
+  <path d="M 80 45 L 85 70 L 115 70 L 120 45 Z" fill="url(#bottleGradient)" stroke="#d1d5db" stroke-width="1"/>
+
+  <!-- Main bottle body -->
+  <rect x="60" y="70" width="80" height="160" rx="8" fill="url(#bottleGradient)" stroke="#d1d5db" stroke-width="2"/>
+
+  <!-- Liquid inside -->
+  <rect x="65" y="120" width="70" height="105" rx="5" fill="url(#liquidGradient)"/>
+
+  <!-- Reflection/shine effect -->
+  <ellipse cx="90" cy="100" rx="15" ry="35" fill="#ffffff" opacity="0.2"/>
+  <path d="M 110 80 Q 115 120 112 160" stroke="#ffffff" stroke-width="2" opacity="0.3" fill="none"/>
+
+  <!-- Base -->
+  <ellipse cx="100" cy="235" rx="42" ry="8" fill="#d1d5db" opacity="0.5"/>
+
+  <!-- Decorative label area -->
+  <rect x="70" y="140" width="60" height="50" rx="3" fill="#ffffff" opacity="0.7" stroke="#B56576" stroke-width="1"/>
+  <line x1="80" y1="155" x2="120" y2="155" stroke="#B56576" stroke-width="1" opacity="0.5"/>
+  <line x1="80" y1="165" x2="120" y2="165" stroke="#B56576" stroke-width="1" opacity="0.3"/>
+  <line x1="80" y1="175" x2="120" y2="175" stroke="#B56576" stroke-width="1" opacity="0.3"/>
+</svg>
