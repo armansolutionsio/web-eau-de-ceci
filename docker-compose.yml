@@ -38,6 +38,7 @@ services:
       - ./community.html:/app/frontend/community.html
       - ./news.html:/app/frontend/news.html
       - ./login.html:/app/frontend/login.html
+      - ./profile.html:/app/frontend/profile.html
       - ./css:/app/frontend/css
       - ./js:/app/frontend/js
       - ./assets:/app/frontend/assets

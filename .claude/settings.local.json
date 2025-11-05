@@ -11,7 +11,9 @@
       "Bash(docker logs:*)",
       "Bash(docker-compose down:*)",
       "Bash(docker rm:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(docker-compose logs:*)",
+      "Bash(docker-compose exec:*)"
     ],
     "deny": [],
     "ask": []

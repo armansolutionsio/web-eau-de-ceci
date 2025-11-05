@@ -80,6 +80,10 @@ if FRONTEND_DIR:
     async def login():
         return FileResponse(f"{FRONTEND_DIR}/login.html")
 
+    @app.get("/profile")
+    async def profile():
+        return FileResponse(f"{FRONTEND_DIR}/profile.html")
+
     # Redirects from .html URLs to clean URLs
     @app.get("/index.html")
     async def redirect_index():
@@ -104,6 +108,10 @@ if FRONTEND_DIR:
     @app.get("/login.html")
     async def redirect_login():
         return RedirectResponse(url="/login", status_code=301)
+
+    @app.get("/profile.html")
+    async def redirect_profile():
+        return RedirectResponse(url="/profile", status_code=301)
 
     # Mount static assets (CSS, JS, images)
     app.mount("/css", StaticFiles(directory=f"{FRONTEND_DIR}/css"), name="css")
