@@ -7,16 +7,22 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from app.core.config import settings
-from app.api import perfumes
+from app.api import perfumes, auth
 
 # Create FastAPI app
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
     debug=settings.DEBUG,
+    docs_url="/docs",  # Swagger UI
+    redoc_url="/redoc",  # ReDoc
 )
 
-# CORS middleware
+# ============================================
+# MIDDLEWARES
+# ============================================
+
+# CORS middleware (debe ir primero)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
@@ -25,8 +31,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# No middleware de auth - simple system
+
+# ============================================
+# ROUTERS
+# ============================================
+
 # Include routers
-app.include_router(perfumes.router)
+app.include_router(auth.router)  # /api/auth/*
+app.include_router(perfumes.router)  # /api/perfumes/*
 
 # Determine frontend directory
 frontend_dir = Path("/app/frontend")
