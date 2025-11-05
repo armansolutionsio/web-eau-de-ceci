@@ -5,6 +5,7 @@
 import { perfumes, getAllNotes } from './data-loader.js';
 import { getHashParams, setHashParams, formatNumber } from './app.js';
 import { formatStars, showLoading, showEmptyState } from './ui.js';
+import { renderPerfumeActions } from './perfume-actions.js';
 
 let currentFilters = {
   query: '',
@@ -346,22 +347,25 @@ function paginateResults(perfumes, page, perPage) {
  */
 function renderPerfumes(container, perfumes) {
   container.innerHTML = perfumes.map(perfume => `
-    <a href="/perfume?id=${perfume.id}" class="perfume-card">
-      <div class="perfume-card-image">
-        <img src="${perfume.image}" alt="${perfume.name}">
-      </div>
-      <div class="perfume-card-body">
-        <div class="perfume-card-brand">${perfume.brand}</div>
-        <h3 class="perfume-card-title">${perfume.name}</h3>
-        <div class="perfume-card-rating">
-          ${formatStars(perfume.ratingAvg)}
-          <span class="rating-count">(${formatNumber(perfume.votes)})</span>
+    <div class="perfume-card">
+      <a href="/perfume?id=${perfume.id}">
+        <div class="perfume-card-image">
+          <img src="${perfume.image}" alt="${perfume.name}">
         </div>
-        <div class="perfume-card-notes">
-          ${perfume.notesTop.slice(0, 3).map(note => `<span class="note-chip">${note}</span>`).join('')}
+        <div class="perfume-card-body">
+          <div class="perfume-card-brand">${perfume.brand}</div>
+          <h3 class="perfume-card-title">${perfume.name}</h3>
+          <div class="perfume-card-rating">
+            ${formatStars(perfume.ratingAvg)}
+            <span class="rating-count">(${formatNumber(perfume.votes)})</span>
+          </div>
+          <div class="perfume-card-notes">
+            ${perfume.notesTop.slice(0, 3).map(note => `<span class="note-chip">${note}</span>`).join('')}
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+      ${renderPerfumeActions(perfume.id)}
+    </div>
   `).join('');
 }
 

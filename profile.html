@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil - Eau de Ceci</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="/" class="site-logo" aria-label="Eau de Ceci - Inicio">
+        <img src="assets/logo.svg" alt="Eau de Ceci">
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="/" class="nav-link">Inicio</a></li>
+          <li><a href="/catalog" class="nav-link">Catálogo</a></li>
+          <li><a href="/community" class="nav-link">Comunidad</a></li>
+          <li><a href="/news" class="nav-link">Noticias</a></li>
+        </ul>
+        <div class="header-actions">
+          <a href="/login" class="btn btn-outline btn-sm">Iniciar sesión</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <div id="profile-content">
+        <!-- Profile content will be loaded here -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <img src="assets/logo.svg" alt="Eau de Ceci" style="height: 45px; margin-bottom: var(--space-4);">
+          <p>Descubre tu fragancia perfecta con nuestra colección exclusiva de perfumes de lujo.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Navegación</h4>
+          <div class="footer-links">
+            <a href="/" class="footer-link">Inicio</a>
+            <a href="/catalog" class="footer-link">Catálogo</a>
+            <a href="/community" class="footer-link">Comunidad</a>
+            <a href="/news" class="footer-link">Noticias</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2024 Eau de Ceci. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { initAuthUI, getUser, isAuthenticated, getWishlist, getCollection } from './js/auth.js';
+    import { loadPerfumes, getPerfumeById } from './js/data-loader.js';
+    import { formatStars } from './js/ui.js';
+
+    // Check if user is authenticated
+    if (!isAuthenticated()) {
+      window.location.href = '/login';
+    }
+
+    // Initialize auth UI
+    initAuthUI();
+
+    // Load perfumes
+    await loadPerfumes();
+
+    const user = getUser();
+    const wishlist = getWishlist();
+    const collection = getCollection();
+
+    const wishlistPerfumes = wishlist.map(id => getPerfumeById(id)).filter(p => p);
+    const collectionPerfumes = collection.map(id => getPerfumeById(id)).filter(p => p);
+
+    const profileContent = document.querySelector('#profile-content');
+    profileContent.innerHTML = `
+      <div class="mb-8">
+        <div class="card" style="padding: var(--space-6);">
+          <div style="display: flex; align-items: center; gap: var(--space-4);">
+            <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--cec-rose-dark), var(--cec-rose)); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; font-weight: bold;">
+              ${user.username.charAt(0).toUpperCase()}
+            </div>
+            <div>
+              <h1 class="mb-2">${user.username}</h1>
+              <p class="text-muted">${user.email}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <h2 class="mb-4">💝 Mi Lista de Deseos (${wishlistPerfumes.length})</h2>
+        ${wishlistPerfumes.length === 0 ? `
+          <div class="card" style="padding: var(--space-6); text-align: center;">
+            <p class="text-muted">No tienes perfumes en tu lista de deseos</p>
+            <a href="/catalog" class="btn btn-primary mt-4">Explorar Catálogo</a>
+          </div>
+        ` : `
+          <div class="catalog-grid">
+            ${wishlistPerfumes.map(perfume => `
+              <a href="/perfume?id=${perfume.id}" class="perfume-card">
+                <div class="perfume-card-image">
+                  <img src="${perfume.image}" alt="${perfume.name}">
+                </div>
+                <div class="perfume-card-body">
+                  <div class="perfume-card-brand">${perfume.brand}</div>
+                  <h3 class="perfume-card-title">${perfume.name}</h3>
+                  <div class="perfume-card-rating">
+                    ${formatStars(perfume.ratingAvg)}
+                    <span class="rating-count">(${perfume.votes})</span>
+                  </div>
+                </div>
+              </a>
+            `).join('')}
+          </div>
+        `}
+      </div>
+
+      <div>
+        <h2 class="mb-4">✨ Mi Colección (${collectionPerfumes.length})</h2>
+        ${collectionPerfumes.length === 0 ? `
+          <div class="card" style="padding: var(--space-6); text-align: center;">
+            <p class="text-muted">No tienes perfumes en tu colección</p>
+            <a href="/catalog" class="btn btn-primary mt-4">Explorar Catálogo</a>
+          </div>
+        ` : `
+          <div class="catalog-grid">
+            ${collectionPerfumes.map(perfume => `
+              <a href="/perfume?id=${perfume.id}" class="perfume-card">
+                <div class="perfume-card-image">
+                  <img src="${perfume.image}" alt="${perfume.name}">
+                </div>
+                <div class="perfume-card-body">
+                  <div class="perfume-card-brand">${perfume.brand}</div>
+                  <h3 class="perfume-card-title">${perfume.name}</h3>
+                  <div class="perfume-card-rating">
+                    ${formatStars(perfume.ratingAvg)}
+                    <span class="rating-count">(${perfume.votes})</span>
+                  </div>
+                </div>
+              </a>
+            `).join('')}
+          </div>
+        `}
+      </div>
+    `;
+
+    console.log('[profile] Profile page loaded');
+  </script>
+</body>
+</html>
