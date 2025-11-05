@@ -225,6 +225,10 @@
   <script type="module">
     import { loadPerfumes } from './js/data-loader.js';
     import { initCatalog } from './js/catalog.js';
+    import { initAuthUI } from './js/auth.js';
+
+    // Initialize auth UI
+    initAuthUI();
 
     // Load perfumes from API first
     await loadPerfumes();

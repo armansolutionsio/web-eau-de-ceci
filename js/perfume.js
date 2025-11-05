@@ -5,6 +5,7 @@
 import { getPerfumeById, getSuggestions } from './data-loader.js';
 import { getQueryParam, formatNumber } from './app.js';
 import { formatStars, toast, formatDate, getInitials } from './ui.js';
+import { renderPerfumeActions } from './perfume-actions.js';
 
 /**
  * Initialize perfume detail page
@@ -78,6 +79,8 @@ function renderPerfumeDetail(perfume) {
           </div>
 
           <p class="text-muted mb-6">${perfume.description}</p>
+
+          ${renderPerfumeActions(perfume.id)}
 
           <div class="mb-6" id="notes-pyramid"></div>
           <div class="mb-6" id="characteristics"></div>

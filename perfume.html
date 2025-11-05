@@ -100,6 +100,10 @@
   <script type="module">
     import { loadPerfumes } from './js/data-loader.js';
     import { initPerfumeDetail } from './js/perfume.js';
+    import { initAuthUI } from './js/auth.js';
+
+    // Initialize auth UI
+    initAuthUI();
 
     // Initialize perfume detail
     await loadPerfumes();

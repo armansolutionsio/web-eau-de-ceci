@@ -175,6 +175,11 @@
     import { initSearch } from './js/search.js';
     import { formatStars } from './js/ui.js';
     import { formatNumber } from './js/app.js';
+    import { initAuthUI } from './js/auth.js';
+    import { renderPerfumeActions } from './js/perfume-actions.js';
+
+    // Initialize auth UI
+    initAuthUI();
 
     // Load perfumes from API first
     await loadPerfumes();
@@ -188,22 +193,25 @@
       .slice(0, 6);
 
     document.querySelector('#trending-perfumes').innerHTML = trending.map(perfume => `
-      <a href="/perfume?id=${perfume.id}" class="perfume-card">
-        <div class="perfume-card-image">
-          <img src="${perfume.image}" alt="${perfume.name}">
-        </div>
-        <div class="perfume-card-body">
-          <div class="perfume-card-brand">${perfume.brand}</div>
-          <h3 class="perfume-card-title">${perfume.name}</h3>
-          <div class="perfume-card-rating">
-            ${formatStars(perfume.ratingAvg)}
-            <span class="rating-count">(${formatNumber(perfume.votes)})</span>
+      <div class="perfume-card">
+        <a href="/perfume?id=${perfume.id}">
+          <div class="perfume-card-image">
+            <img src="${perfume.image}" alt="${perfume.name}">
           </div>
-          <div class="perfume-card-notes">
-            ${perfume.notesTop.slice(0, 3).map(note => `<span class="note-chip">${note}</span>`).join('')}
+          <div class="perfume-card-body">
+            <div class="perfume-card-brand">${perfume.brand}</div>
+            <h3 class="perfume-card-title">${perfume.name}</h3>
+            <div class="perfume-card-rating">
+              ${formatStars(perfume.ratingAvg)}
+              <span class="rating-count">(${formatNumber(perfume.votes)})</span>
+            </div>
+            <div class="perfume-card-notes">
+              ${perfume.notesTop.slice(0, 3).map(note => `<span class="note-chip">${note}</span>`).join('')}
+            </div>
           </div>
-        </div>
-      </a>
+        </a>
+        ${renderPerfumeActions(perfume.id)}
+      </div>
     `).join('');
 
     // Render new arrivals (top 6 by release year)
@@ -212,23 +220,26 @@
       .slice(0, 6);
 
     document.querySelector('#new-arrivals').innerHTML = newArrivals.map(perfume => `
-      <a href="/perfume?id=${perfume.id}" class="perfume-card">
-        <div class="perfume-card-image">
-          <img src="${perfume.image}" alt="${perfume.name}">
-          <span class="perfume-card-badge badge badge-rose">Nuevo</span>
-        </div>
-        <div class="perfume-card-body">
-          <div class="perfume-card-brand">${perfume.brand}</div>
-          <h3 class="perfume-card-title">${perfume.name}</h3>
-          <div class="perfume-card-rating">
-            ${formatStars(perfume.ratingAvg)}
-            <span class="rating-count">(${formatNumber(perfume.votes)})</span>
+      <div class="perfume-card">
+        <a href="/perfume?id=${perfume.id}">
+          <div class="perfume-card-image">
+            <img src="${perfume.image}" alt="${perfume.name}">
+            <span class="perfume-card-badge badge badge-rose">Nuevo</span>
           </div>
-          <div class="perfume-card-notes">
-            ${perfume.notesTop.slice(0, 3).map(note => `<span class="note-chip">${note}</span>`).join('')}
+          <div class="perfume-card-body">
+            <div class="perfume-card-brand">${perfume.brand}</div>
+            <h3 class="perfume-card-title">${perfume.name}</h3>
+            <div class="perfume-card-rating">
+              ${formatStars(perfume.ratingAvg)}
+              <span class="rating-count">(${formatNumber(perfume.votes)})</span>
+            </div>
+            <div class="perfume-card-notes">
+              ${perfume.notesTop.slice(0, 3).map(note => `<span class="note-chip">${note}</span>`).join('')}
+            </div>
           </div>
-        </div>
-      </a>
+        </a>
+        ${renderPerfumeActions(perfume.id)}
+      </div>
     `).join('');
 
     // Render top rated (top 6 by rating)
@@ -237,22 +248,25 @@
       .slice(0, 6);
 
     document.querySelector('#top-rated').innerHTML = topRated.map(perfume => `
-      <a href="/perfume?id=${perfume.id}" class="perfume-card">
-        <div class="perfume-card-image">
-          <img src="${perfume.image}" alt="${perfume.name}">
-        </div>
-        <div class="perfume-card-body">
-          <div class="perfume-card-brand">${perfume.brand}</div>
-          <h3 class="perfume-card-title">${perfume.name}</h3>
-          <div class="perfume-card-rating">
-            ${formatStars(perfume.ratingAvg)}
-            <span class="rating-count">(${formatNumber(perfume.votes)})</span>
+      <div class="perfume-card">
+        <a href="/perfume?id=${perfume.id}">
+          <div class="perfume-card-image">
+            <img src="${perfume.image}" alt="${perfume.name}">
           </div>
-          <div class="perfume-card-notes">
-            ${perfume.notesTop.slice(0, 3).map(note => `<span class="note-chip">${note}</span>`).join('')}
+          <div class="perfume-card-body">
+            <div class="perfume-card-brand">${perfume.brand}</div>
+            <h3 class="perfume-card-title">${perfume.name}</h3>
+            <div class="perfume-card-rating">
+              ${formatStars(perfume.ratingAvg)}
+              <span class="rating-count">(${formatNumber(perfume.votes)})</span>
+            </div>
+            <div class="perfume-card-notes">
+              ${perfume.notesTop.slice(0, 3).map(note => `<span class="note-chip">${note}</span>`).join('')}
+            </div>
           </div>
-        </div>
-      </a>
+        </a>
+        ${renderPerfumeActions(perfume.id)}
+      </div>
     `).join('');
 
     console.log('[index] Home page initialized');
